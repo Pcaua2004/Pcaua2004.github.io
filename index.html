@@ -1,95 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cartinha Virtual</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartinha Virtual</title>
+  <style>
     body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #f7f7f7;
-  }
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #f7f7f7;
+    }
 
-  .container {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-  }
+    .container {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
 
-  .screen {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 400px;
-  }
+    .screen {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+    }
 
-  .screen.active {
-    display: block;
-  }
+    .screen.active {
+      display: block;
+    }
 
-  .image-container {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+    .image-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-  .image-container img {
-    max-width: 300px;
-    height: 300px;
-    border-radius: 10px; /* Estilização opcional para arredondar as bordas da imagem */
-  }
+    .image-container img {
+      max-width: 300px;
+      height: 300px;
+      border-radius: 10px;
+    }
 
-  .text-box {
-    margin-bottom: 20px;
-    padding: 15px;
-    background: #ddd;
-    border-radius: 10px; /* Bordas arredondadas para a caixa de texto */
-  }
+    .text-box {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #ddd;
+      border-radius: 10px;
+    }
 
-  .button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    font-size: 1.2em;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+    .button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2em;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-  .button:hover {
-    background-color: #0056b3;
-  }
+    .button:hover {
+      background-color: #0056b3;
+    }
 
- .button-gigante {
-    display: inline-block;
-    padding: 20px 40px; /* Ajuste o tamanho conforme necessário */
-    font-size: 2em; /* Tamanho da fonte para o botão gigante */
-    margin-top: 20px; /* Espaçamento acima do botão */
-    background-color: #4CAF50; /* Cor de fundo do botão */
-    color: white; /* Cor do texto do botão */
-    border: none;
-    border-radius: 10px; /* Bordas arredondadas */
-    cursor: pointer;
-  }
+    .button-gigante {
+      display: inline-block;
+      padding: 20px 40px;
+      font-size: 1.5em;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-  .button-gigante:hover {
-    background-color: #45a049;
-  }
-  
-  /* Você pode adicionar mais estilos personalizados aqui */
-</style>
+    .button-gigante:hover {
+      background-color: #45a049;
+    }
+    
+    .box {
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #000000;
+            cursor: pointer;
+        }
+        
+  </style>
 </head>
 <body>
 
@@ -106,46 +114,93 @@
   </div>
   <div class="text-box">
     Olá Luiza, a seguir acontecerá
-um dos melhores presentes de
-aniversário que você já recebeu.
-(Fora a camisa da Gwen). Deu
-muito trabalho e foi feito com
-muito carinho, espero que goste!
-Aproveite cada segundo pois você
-não vai receber uma cartinha tão
-incrivel como essa.
-
+    um dos melhores presentes de
+    aniversário que você já recebeu.
+    (Fora a camisa da Gwen). Deu
+    muito trabalho e foi feito com
+    muito carinho, espero que goste!
+    Aproveite cada segundo pois você
+    não vai receber uma cartinha tão
+    incrível como essa.
   </div>
   <button class="button" onclick="changeScreen(3)">Avançar</button>
 </div>
 
 <div id="tela3" class="container screen">
-  <button class="button-gigante" onclick="toggleTrilhaSonora()">ATIVAR / TRILHA SONORA IMPACTANTE / (ROCK DE VELHINHO)</button>
-  <audio id="audioPlayer" autoplay loop>
+  <button class="button-gigante" onclick="toggleTrilhaSonora()">Tocar</button>
+  <audio id="audioPlayer" loop>
     <source src="SLY.mp3" type="audio/mpeg">
   </audio>
 </div>
 
-<!-- As outras telas serão adicionadas abaixo conforme necessário -->
+<div id="tela4" class="container screen">
+  <div class="message">
+    Motivos para ter uma Sadovik Luiza na sua vida:
+  </div>
+  <div id="box1" class="box" onclick="revealText('box1')">Caixa 1</div>
+  <div id="box2" class="box" onclick="revealText('box2')">Caixa 2</div>
+  <div id="box3" class="box" onclick="revealText('box3')">Caixa 3</div>
+  <div id="box4" class="box" onclick="revealText('box4')">Caixa 4</div>
+  <div id="box5" class="box" onclick="revealText('box5')">Caixa 5</div>
+  <div id="box6" class="box" onclick="revealText('box6')">Caixa 6</div>
+  <div id="box7" class="box" onclick="revealText('box7')">Caixa 7</div>
+  <div id="box8" class="box" onclick="revealText('box8')">Caixa 8</div>
+  <button class="button-gigante" onclick="changeScreen(6)">Avançar
+</div>
+
 
 <script>
-var audioPlayer = document.getElementById('audioPlayer');
+  var audioPlayer = document.getElementById('audioPlayer');
 
-function changeScreen(screenNumber) {
-  var screens = document.getElementsByClassName('screen');
-  for (var i = 0; i < screens.length; i++) {
-    screens[i].classList.remove('active');
+  function changeScreen(screenNumber) {
+    var screens = document.getElementsByClassName('screen');
+    for (var i = 0; i < screens.length; i++) {
+      screens[i].classList.remove('active');
+    }
+    document.getElementById('tela' + screenNumber).classList.add('active');
   }
-  document.getElementById('tela' + screenNumber).classList.add('active');
+
+  function toggleTrilhaSonora() {
+    if (audioPlayer.paused) {
+      audioPlayer.play();
+      changeScreen(4); // Agora a tela 4 é exibida quando a trilha sonora começa a tocar
+    } else {
+      audioPlayer.pause();
+    }
+  }
+
+  function revealText(boxId) {
+  var box = document.getElementById(boxId);
+  // Define um texto específico para cada caixa
+  switch (boxId) {
+    case 'box1':
+      box.textContent = 'Esta é a frase da caixa 1!';
+      break;
+    case 'box2':
+      box.textContent = 'Olhe, a frase da caixa 2 aqui!';
+      break;
+    case 'box3':
+      box.textContent = 'Surpresa! Frase da caixa 3!';
+      break;
+    case 'box4':
+      box.textContent = 'Surpresa! Frase da caixa 4!';
+      break;
+    case 'box5':
+      box.textContent = 'Surpresa! Frase da caixa 5!';
+      break;
+    case 'box6':
+      box.textContent = 'Surpresa! Frase da caixa 6!';
+      break;
+    case 'box7':
+      box.textContent = 'Surpresa! Frase da caixa 7!';
+      break;
+    case 'box8':
+      box.textContent = 'Surpresa! Frase da caixa 8!';
+      break;
+    // Adicione mais casos conforme necessário para caixas adicionais
+  }
 }
 
-function toggleTrilhaSonora() {
-  if (audioPlayer.paused) {
-    audioPlayer.play(); // Inicia a reprodução da música de fundo
-  } else {
-    audioPlayer.pause(); // Pausa a reprodução da música de fundo
-  }
-}
 </script>
 
 </body>
