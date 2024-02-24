@@ -69,7 +69,7 @@
     }
 
     .button:hover {
-      background-color: #0056b3;
+      background-color: #007bff;
     }
 
     .button-gigante {
@@ -78,7 +78,7 @@
       font-size: 1.5em;
       margin-top: 20px;
       margin-bottom: 20px;
-      background-color: #0056b3;
+      background-color: #007bff;
       color: white;
       border: none;
       border-radius: 10px;
@@ -87,16 +87,30 @@
     }
 
     .button-gigante:hover {
-      background-color: #0056b3;
+      background-color: #007bff;
     }
     
     .box {
-            padding: 20px;
-            margin: 10px;
-            border: 1px solid #000000;
-            cursor: pointer;
-        }
-        
+      padding: 20px;
+      margin: 10px;
+      border: 1px solid #000000;
+      cursor: pointer;
+    }
+    
+    #tela6 iframe {
+      max-width: 600px; /* Largura máxima do vídeo */
+      max-height: 600px; /* Altura máxima do vídeo */
+      width: 100%; /* Faz o vídeo expandir para a largura do container */
+      height: 300px; /* Mantém a proporção do vídeo */
+    }
+
+    .feliz-aniversario {
+      font-size: 3vw; /* Tamanho da fonte em relação à largura da viewport */
+      font-weight: bold;
+      color: #000000; /* Cor vermelha */
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -128,10 +142,10 @@
 
 <div id="tela3" class="container screen">
   <div class="text-box">
-Clique para ativar a
-trilha sonora IMPACTANTE!<br>
-Mais conhecida como:<br>
-"Rock de velhinho"
+    Clique para ativar a
+    trilha sonora IMPACTANTE!<br>
+    Mais conhecida como:<br>
+    "Rock de velhinho"
   </div>
   <button class="button-gigante" onclick="toggleTrilhaSonora()">Tocar</button>
   <audio id="audioPlayer" loop>
@@ -140,7 +154,7 @@ Mais conhecida como:<br>
 </div>
 <div id="tela4" class="container screen">
   <div class="message">
-    Alguns dos principais motivos para ter uma<br> Sadovik Luiza na sua vida:
+    Alguns dos principais motivos para ter uma<br> Sadovik Luiza na sua vida:<br><strong>(Clique nas caixas!)</strong>
   </div>
   <div id="box1" class="box" onclick="revealText('box1')">?</div>
   <div id="box2" class="box" onclick="revealText('box2')">?</div>
@@ -157,7 +171,11 @@ Mais conhecida como:<br>
   <div class="image-container">
     <img src="https://i.ibb.co/dLBgkBN/Luiza.png" alt="Descrição da Imagem" style="width: 200%; height: 200%">
   </div>
-  <div class="text-box">
+
+  <button class="button" id="showTextButton">Mostrar</button>
+
+  <div id="hiddenText" class="text-box" style="display:none;">
+    <br>
     TEXTOTEXOTEXOTTEXOTOETO<BR>
     TEXTOTEXOTEXOTTEXOTOETO<BR>
     TEXTOTEXOTEXOTTEXOTOETO<BR>
@@ -171,12 +189,31 @@ Mais conhecida como:<br>
     TEXTOTEXOTEXOTTEXOTOETO<BR>
     TEXTOTEXOTEXOTTEXOTOETO<BR>
     TEXTOTEXOTEXOTTEXOTOETO<BR>
-                              
+    TEXTOTEXOTEXOTTEXOTOETO<BR>
+    TEXTOTEXOTEXOTTEXOTOETO<BR>
+    TEXTOTEXOTEXOTTEXOTOETO<BR>
+    TEXTOTEXOTEXOTTEXOTOETO<BR>
+    TEXTOTEXOTEXOTTEXOTOETO<BR>
+    TEXTOTEXOTEXOTTEXOTOETO<BR>
+    TEXTOTEXOTEXOTTEXOTOETO<BR>
+    TEXTOTEXOTEXOTTEXOTOETO<BR>
+    <br>
   </div>
-  <!-- Aqui você pode adicionar um botão de "Avançar" se houver outra tela seguinte, ou outro tipo de conteúdo conforme desejado -->
-  
+
+  <div>
+    <button class="button" id="advanceButton" style="display:none;" onclick="changeScreen(6)">Avançar</button>
+  </div>
 </div>
 
+<div id="tela6" class="container screen">
+  <iframe width="560" height="615" src="https://www.youtube.com/embed/ylpSnEORW9k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <button class="button" onclick="changeScreen(7)">Avançar</button>
+</div>
+
+<div id="tela7" class="container screen">
+  <div class="feliz-aniversario">FELIZ ANIVERSÁRIO LUIZA!</div>
+  <button id="cliqueAquiButton" class="button" onclick="playSecondMP3(); hideButton()">Clique aqui!</button>
+</div>
 
 
 <script>
@@ -188,6 +225,11 @@ Mais conhecida como:<br>
       screens[i].classList.remove('active');
     }
     document.getElementById('tela' + screenNumber).classList.add('active');
+    // Se a tela 6 foi ativada, exibir um alerta e pausar a música
+    if (screenNumber === 6) {
+      alert('Espere o vídeo carregar, dê play, gire o celular, coloque o nariz no meio da tela e depois clique em "AVANÇAR"!');
+      audioPlayer.pause();
+    }
   }
 
   function toggleTrilhaSonora() {
@@ -199,39 +241,82 @@ Mais conhecida como:<br>
     }
   }
 
-  function revealText(boxId) {
-  var box = document.getElementById(boxId);
-  // Define um texto específico para cada caixa
-  switch (boxId) {
-    case 'box1':
-      box.textContent = 'Esta é a frase da caixa 1!';
-      break;
-    case 'box2':
-      box.textContent = 'Olhe, a frase da caixa 2 aqui!';
-      break;
-    case 'box3':
-      box.textContent = 'Surpresa! Frase da caixa 3!';
-      break;
-    case 'box4':
-      box.textContent = 'Surpresa! Frase da caixa 4!';
-      break;
-    case 'box5':
-      box.textContent = 'Surpresa! Frase da caixa 5!';
-      break;
-    case 'box6':
-      box.textContent = 'Surpresa! Frase da caixa 6!';
-      break;
-    case 'box7':
-      box.textContent = 'Surpresa! Frase da caixa 7!';
-      break;
-    case 'box8':
-      box.textContent = 'Surpresa! Frase da caixa 8!';
-      break;
-    // Adicione mais casos conforme necessário para caixas adicionais
+  function goToScreen6() {
+    changeScreen(6);
   }
-}
+
+  function revealText(boxId) {
+    var box = document.getElementById(boxId);
+    switch (boxId) {
+      case 'box1':
+        box.textContent = 'Esta é a frase da caixa 1!';
+        break;
+      case 'box2':
+        box.textContent = 'Olhe, a frase da caixa 2 aqui!';
+        break;
+      case 'box2':
+        box.textContent = 'Olhe, a frase da caixa 2 aqui!';
+        break;
+      case 'box3':
+        box.textContent = 'Olhe, a frase da caixa 2 aqui!';
+        break;
+      case 'box4':
+        box.textContent = 'Olhe, a frase da caixa 2 aqui!';
+        break;
+      case 'box5':
+        box.textContent = 'Olhe, a frase da caixa 2 aqui!';
+        break;
+      case 'box6':
+        box.textContent = 'Olhe, a frase da caixa 2 aqui!';
+        break;
+      case 'box7':
+        box.textContent = 'Olhe, a frase da caixa 2 aqui!';
+        break;
+      case 'box8':
+        box.textContent = 'Surpresa! Frase da caixa 8!';
+        break;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var showTextButton = document.getElementById('showTextButton');
+    var hiddenText = document.getElementById('hiddenText');
+    var advanceButton = document.getElementById('advanceButton');
+
+    showTextButton.addEventListener('click', function() {
+      hiddenText.style.display = 'block'; // Mostra o texto
+      advanceButton.style.display = 'block'; // Mostra o botão Avançar
+      this.style.display = 'none'; // Esconde o botão Mostrar
+    });
+  });
+
+  var audioPlayer = document.getElementById('audioPlayer');
+  var audioSource = document.getElementById('audioSource');
+
+  function changeAudioSource(newSource) {
+    audioSource.src = newSource;
+    audioPlayer.load(); // Recarrega o arquivo de áudio
+  }
+
+  function advanceToNextScreen() {
+    changeAudioSource('PRBS.mp3'); // Troque 'novo-arquivo.mp3' pelo caminho do novo arquivo MP3
+    changeScreen(7); // Altere para o número da tela seguinte
+  }
+
+  function playSecondMP3() {
+    // Inicia a reprodução do segundo arquivo MP3
+    // Altere 'seu-segundo-arquivo.mp3' para o caminho do segundo arquivo MP3
+    var secondAudio = new Audio('PRBS.mp3');
+    secondAudio.play();
+  }
+
+  function hideButton() {
+    var button = document.getElementById('cliqueAquiButton');
+    button.style.display = 'none';
+  }
 
 </script>
+
 
 </body>
 </html>
