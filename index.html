@@ -213,8 +213,8 @@
 <div id="tela7" class="container screen">
   <div class="feliz-aniversario">FELIZ ANIVERSÁRIO LUIZA!</div>
   <button id="cliqueAquiButton" class="button" onclick="playSecondMP3(); hideButton()">Clique aqui!</button>
+  <button class="button" onclick="resetProcess()">Resetar</button>
 </div>
-
 
 <script>
   var audioPlayer = document.getElementById('audioPlayer');
@@ -303,13 +303,28 @@
     changeScreen(7); // Altere para o número da tela seguinte
   }
 
+  var secondAudio = null;
+
   function playSecondMP3() {
     // Inicia a reprodução do segundo arquivo MP3
-    // Altere 'seu-segundo-arquivo.mp3' para o caminho do segundo arquivo MP3
-    var secondAudio = new Audio('PRBS.mp3');
+    secondAudio = new Audio('PRBS.mp3');
     secondAudio.play();
   }
 
+  function resetProcess() {
+    // Pare a reprodução do último MP3 (se estiver reproduzindo)
+    if (secondAudio !== null) {
+      secondAudio.pause();
+    }
+
+    // Altere o estilo do botão "Clique aqui" para que ele seja exibido novamente
+    var button = document.getElementById('cliqueAquiButton');
+    button.style.display = 'block';
+
+    // Altere a tela ativa de volta para a primeira tela (tela1)
+    changeScreen(1);
+  };
+  
   function hideButton() {
     var button = document.getElementById('cliqueAquiButton');
     button.style.display = 'none';
