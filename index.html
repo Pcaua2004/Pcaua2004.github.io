@@ -111,6 +111,10 @@
       text-align: center;
     }
 
+    .feliz-aniversario {
+    font-size: 40px; /* Aumenta o tamanho do texto */
+}
+
   </style>
 </head>
 <body>
@@ -120,6 +124,9 @@
     Para Sadovik Luiza :)
   </div>
   <button class="button" onclick="changeScreen(2)">Avançar</button>
+  <div class="message">
+    (Então você preferiu a carta do bobão né?)
+</div>
 </div>
 
 <div id="tela2" class="container screen">
@@ -127,7 +134,7 @@
     <img src="https://i.ibb.co/85vRBWv/SHURECK.png" alt="Descrição da Imagem">
   </div>
   <div class="text-box">
-    Olá Luiza, a seguir acontecerá
+    Olá Luiza, a seguir você vai ver
     um dos melhores presentes de
     aniversário que você já recebeu.<br>
     (Fora a camisa da Gwen)<br> Deu
@@ -176,16 +183,14 @@
 
   <div id="hiddenText" class="text-box" style="display:none;">
     <br>
-  Bom a parte mais fácil já foi que é criar
-esse código INSANO, agora é a única parte que não
-vou utilizar ajuda de IA's pra fazer. Quero só concretizar
+    (Espero que o solo de Still Loving You esteja no ÁPICE)<br> Bom, a parte mais fácil já foi que é criar
+esse código INSANO, agora é a parte mais difícil que não tive ajuda de nenhuma IA pra fazer. Quero só concretizar
 que você uma pessoa muito legal que estou adorando conhecer
-e que por algum motivo me fez perder umas 5-6horas nesse
-projetinho kkkkkk. Acho você espetácular em todos os quesitos
+e que por algum motivo que ainda não sei me fez perder umas 5-6horas nesse
+projeto. Acho você espetácular em todos os quesitos
 espero que você tenha um ótimo dia e que cada vez mais possa
 fazer todos em sua volta mais felizes, porque é isso que sinto
-quando estou contigo, foram poucos momentos mas já sou grato por todos,
-(Espero o solo de Still Loving You esteja no ÁPICE), espero também que
+quando estou contigo, foram poucos momentos mas já sou grato por todos, espero que
 mais momentos venham e que a gente se divirta bastante, seja eu te dando susto
 ou você me amassando no arcade :)
   </div>
@@ -201,6 +206,9 @@ ou você me amassando no arcade :)
 </div>
 
 <div id="tela7" class="container screen">
+  <div class="image-container">
+    <img src="https://i.ibb.co/z5F3mBt/pngegg.png" alt="Descrição da Imagem">
+  </div>
   <div class="feliz-aniversario">FELIZ ANIVERSÁRIO LUIZA!</div>
   <button id="cliqueAquiButton" class="button" onclick="playSecondMP3(); hideButton()">Clique aqui!</button>
   <button class="button" onclick="resetProcess()">Resetar</button>
@@ -239,16 +247,16 @@ ou você me amassando no arcade :)
     var box = document.getElementById(boxId);
     switch (boxId) {
       case 'box1':
-        box.textContent = 'Ela é simpática';
+        box.textContent = 'Ela é simpática e fofa';
         break;
       case 'box2':
         box.textContent = 'Ela tem o melhor gosto musical';
         break;
       case 'box2':
-        box.textContent = 'Ela é fofa';
+        box.textContent = 'A voz dela te acalma';
         break;
       case 'box3':
-        box.textContent = 'Ela toma susto FÁCIL(O que é MUITO ENGRAÇADO)';
+        box.textContent = 'Ela toma susto FÁCIL (O que é MUITO ENGRAÇADO)';
         break;
       case 'box4':
         box.textContent = 'Ela toca guitarra';
@@ -257,13 +265,13 @@ ou você me amassando no arcade :)
         box.textContent = 'Ela te faz assistir os melhores filmes';
         break;
       case 'box6':
-        box.textContent = 'Ela sempre tá com um sorriso no rosto';
+        box.textContent = 'Ela sempre tá sempre alegre';
         break;
       case 'box7':
-        box.textContent = 'Ela é linda :)';
+        box.textContent = 'O sorriso dela é lindo';
         break;
       case 'box8':
-        box.textContent = 'E o principal, ela ama a Deus';
+        box.textContent = 'Ela é linda :)';
         break;
     }
   }
