@@ -1,342 +1,63 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cartinha Virtual</title>
-  <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: #f7f7f7;
-    }
-
-    .container {
-      width: 100%;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-
-    .screen {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 400px;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    .image-container {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .image-container img {
-      max-width: 300px;
-      height: 300px;
-      border-radius: 10px;
-    }
-
-    .text-box {
-      margin-bottom: 20px;
-      padding: 15px;
-      background: #ddd;
-      border-radius: 10px;
-    }
-
-    .button {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      font-size: 1.2em;
-      color: white;
-      background-color: #007bff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .button:hover {
-      background-color: #007bff;
-    }
-
-    .button-gigante {
-      display: inline-block;
-      padding: 20px 40px;
-      font-size: 1.5em;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .button-gigante:hover {
-      background-color: #007bff;
-    }
-    
-    .box {
-      padding: 20px;
-      margin: 10px;
-      border: 1px solid #000000;
-      cursor: pointer;
-    }
-    
-    #tela6 iframe {
-      max-width: 600px; /* Largura máxima do vídeo */
-      max-height: 600px; /* Altura máxima do vídeo */
-      width: 100%; /* Faz o vídeo expandir para a largura do container */
-      height: 300px; /* Mantém a proporção do vídeo */
-    }
-
-    .feliz-aniversario {
-      font-size: 3vw; /* Tamanho da fonte em relação à largura da viewport */
-      font-weight: bold;
-      color: #000000; /* Cor vermelha */
-      text-align: center;
-    }
-
-    .feliz-aniversario {
-    font-size: 40px; /* Aumenta o tamanho do texto */
-}
-
-.message2 {
-  margin-top: 80px; /* Ajusta a margem entre essa mensagem específica e o botão acima */
-}
-
-  </style>
-</head>
-<body>
-
-<div id="tela1" class="container screen active">
-  <div class="message">
-    Para Sadovik Luiza :)
-  </div>
-  <button class="button" onclick="changeScreen(2)">Avançar</button>
-  <div class="message">
-    (Ahhh então você clicou no link do bobão né, porque será?)
-</div>
-</div>
-
-<div id="tela2" class="container screen">
-  <div class="image-container">
-    <img src="https://i.ibb.co/85vRBWv/SHURECK.png" alt="Descrição da Imagem">
-  </div>
-  <div class="text-box">
-    Olá Luiza, a seguir você vai ver
-    um dos melhores presentes de
-    aniversário que você já recebeu.<br>
-    (Fora a camisa da Gwen)<br> Deu
-    MUITO trabalho e foi feito com
-    MUITO carinho, espero que goste!
-    Aproveite cada segundo pois você
-    não vai receber uma cartinha tão
-    incrível como essa.<br> (A menos que eu faça as próximas)
-  </div>
-  <button class="button" onclick="changeScreen(3)">Avançar</button>
-</div>
-
-<div id="tela3" class="container screen">
-  <div class="text-box">
-    Clique para ativar a
-    trilha sonora IMPACTANTE!<br>
-    Mais conhecida como:<br>
-    "Rock de velhinho"
-  </div>
-  <button class="button-gigante" onclick="toggleTrilhaSonora()">Tocar</button>
-  <audio id="audioPlayer" loop>
-    <source src="SLY.mp3" type="audio/mpeg">
-  </audio>
-</div>
-<div id="tela4" class="container screen">
-  <div class="message">
-    Alguns dos principais motivos para ter uma<br> Sadovik Luiza na sua vida:<br><strong>(Clique nas caixas!)</strong>
-  </div>
-  <div id="box1" class="box" onclick="revealText('box1')">?</div>
-  <div id="box2" class="box" onclick="revealText('box2')">?</div>
-  <div id="box3" class="box" onclick="revealText('box3')">?</div>
-  <div id="box4" class="box" onclick="revealText('box4')">?</div>
-  <div id="box5" class="box" onclick="revealText('box5')">?</div>
-  <div id="box6" class="box" onclick="revealText('box6')">?</div>
-  <div id="box7" class="box" onclick="revealText('box7')">?</div>
-  <div id="box8" class="box" onclick="revealText('box8')">?</div>
-  <button class="button-gigante" onclick="changeScreen(5)">Avançar</button>
-</div>
-
-<div id="tela5" class="container screen">
-  <div class="image-container">
-    <img src="https://i.ibb.co/dLBgkBN/Luiza.png" alt="Descrição da Imagem" style="width: 200%; height: 200%">
-  </div>
-
-  <button class="button" id="showTextButton">Mostrar</button>
-
-  <div id="hiddenText" class="text-box" style="display:none;">
-    <br>
-    (Espero que o solo de Still Loving You esteja no ÁPICE)<br> Bom, a parte mais fácil já foi que é criar
-esse código INSANO, agora é a parte mais difícil que não tive ajuda de nenhuma IA pra fazer. Quero só concretizar
-que você uma pessoa muito legal que estou adorando conhecer
-e que por algum motivo que ainda não sei me fez ficar umas 5-6horas nesse
-projeto. Acho você espetácular em todos os quesitos
-espero que você tenha um ótimo dia e que cada vez mais possa
-fazer todos em sua volta mais felizes, porque é isso que sinto
-quando estou contigo, foram poucos momentos mas já sou grato por todos, espero que
-mais momentos venham e que a gente se divirta bastante, seja eu te dando susto
-ou você me amassando no arcade :)
-  </div>
-
-  <div>
-    <button class="button" id="advanceButton" style="display:none;" onclick="changeScreen(6)">Avançar</button>
-  </div>
-</div>
-
-<div id="tela6" class="container screen">
-  <iframe width="560" height="615" src="https://www.youtube.com/embed/K2W39-vvAqs?si=jFpwNEw-vFXFsNc8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  <button class="button" onclick="changeScreen(7)">Avançar</button>
-</div>
-
-<div id="tela7" class="container screen">
-  <div class="image-container">
-    <img src="https://i.ibb.co/z5F3mBt/pngegg.png" alt="Descrição da Imagem">
-  </div>
-  <div class="feliz-aniversario">FELIZ ANIVERSÁRIO LUIZA!</div>
-  <button id="cliqueAquiButton" class="button" onclick="playSecondMP3(); hideButton()">Clique aqui!</button>
-  <button class="button" onclick="resetProcess()">Resetar</button>
-  <div class="message2">
-    Por Cauãzito :)
-  </div>
-</div>
-
 <script>
-  var audioPlayer = document.getElementById('audioPlayer');
+while(true){
+let input = prompt(
+`----------------------------------------------------------------
+  Bem-Vindo, escreva o NÚMERO correspondente a fruta:
+----------------------------------------------------------------
+1: Banana
+2: Maçã
+3: Manga
+4: Pera
+5: Uva
+6: Romã
+7: Maracujá
+8: Mamão
+9: Sair`
+);
 
-  function changeScreen(screenNumber) {
-    var screens = document.getElementsByClassName('screen');
-    for (var i = 0; i < screens.length; i++) {
-      screens[i].classList.remove('active');
+let tabelaFrutas = {
+    1: "Banana",
+    2: "Maçã",
+    3: "Manga",
+    4: "Pera",
+    5: "Uva",
+    6: "Romã",
+    7: "Maracujá",
+    8: "Mamão",
+    9: "Sair"
+};
+
+let escolhaDaFruta = tabelaFrutas[input];
+
+
+if(escolhaDaFruta){
+    if(escolhaDaFruta === "Sair"){
+        break
+    }else{
+    alert(`A fruta escolhida foi ${escolhaDaFruta}`);
+    if (escolhaDaFruta === "Banana") {
+            alert(` As bananas são naturalmente radioativas devido ao alto teor de potássio, mas não se preocupe, a quantidade é tão baixa que não representa riscos à saúde humana.`);
+        } else if (escolhaDaFruta === "Maçã") {
+            alert(` As maçãs flutuam na água porque cerca de 25% do seu volume é composto por ar.`);
+        } else if (escolhaDaFruta === "Manga") {
+            alert(` Existem mais de 1.000 variedades de manga cultivadas em todo o mundo.`);
+        } else if (escolhaDaFruta === "Pera") {
+            alert(` Pode levar de 5 a 7 anos para uma árvore de pereira começar a produzir frutas.Peras são ricas em fibras!`);
+        } else if (escolhaDaFruta === "Uva") {
+            alert(` As uvas são usadas na produção de mais de 60 tipos diferentes de bebidas, incluindo vinho, suco, geleia e passas.`);
+        } else if (escolhaDaFruta === "Romã") {
+            alert(` Uma romã pode conter mais de 600 sementes comestíveis.`);
+        } else if (escolhaDaFruta === "Maracujá") {
+            alert(` O maracujá contém uma substância chamada passiflorina, que pode ter efeitos relaxantes e calmantes.`);
+        } else if (escolhaDaFruta === "Mamão") {
+            alert(` O mamão é uma excelente fonte de vitamina C; uma única fruta pode fornecer mais de 200% da quantidade diária recomendada dessa vitamina.`);
+        }
     }
-    document.getElementById('tela' + screenNumber).classList.add('active');
-    // Se a tela 6 foi ativada, exibir um alerta e pausar a música
-    if (screenNumber === 6) {
-      alert('INSTRUÇÕES: Espere o vídeo carregar, dê play, coloque em tela cheia, gire o celular pra esquerda e coloque o nariz no meio da tela. Quando o vídeo acabar clique em "AVANÇAR"!');
-      audioPlayer.pause();
-    }
-  }
+}else{
+    alert(`O número solicitado é inválido.\nAtualize a página para recomeçar.`);
+    break
+}
 
-  function toggleTrilhaSonora() {
-    if (audioPlayer.paused) {
-      audioPlayer.play();
-      changeScreen(4); // Agora a tela 4 é exibida quando a trilha sonora começa a tocar
-    } else {
-      audioPlayer.pause();
-    }
-  }
-
-  function goToScreen6() {
-    changeScreen(6);
-  }
-
-  function revealText(boxId) {
-    var box = document.getElementById(boxId);
-    switch (boxId) {
-      case 'box1':
-        box.textContent = 'Ela é simpática e fofa';
-        break;
-      case 'box2':
-        box.textContent = 'Ela tem o melhor gosto musical';
-        break;
-      case 'box2':
-        box.textContent = 'A voz dela te acalma';
-        break;
-      case 'box3':
-        box.textContent = 'Ela toma susto FÁCIL (O que é MUITO ENGRAÇADO)';
-        break;
-      case 'box4':
-        box.textContent = 'Ela toca guitarra';
-        break;
-      case 'box5':
-        box.textContent = 'Ela te faz assistir os melhores filmes';
-        break;
-      case 'box6':
-        box.textContent = 'Ela sempre tá sempre alegre';
-        break;
-      case 'box7':
-        box.textContent = 'O sorriso dela é lindo';
-        break;
-      case 'box8':
-        box.textContent = 'Ela é linda :)';
-        break;
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var showTextButton = document.getElementById('showTextButton');
-    var hiddenText = document.getElementById('hiddenText');
-    var advanceButton = document.getElementById('advanceButton');
-
-    showTextButton.addEventListener('click', function() {
-      hiddenText.style.display = 'block'; // Mostra o texto
-      advanceButton.style.display = 'block'; // Mostra o botão Avançar
-      this.style.display = 'none'; // Esconde o botão Mostrar
-    });
-  });
-
-  var audioPlayer = document.getElementById('audioPlayer');
-  var audioSource = document.getElementById('audioSource');
-
-  function changeAudioSource(newSource) {
-    audioSource.src = newSource;
-    audioPlayer.load(); // Recarrega o arquivo de áudio
-  }
-
-  function advanceToNextScreen() {
-    changeAudioSource('PRBS.mp3'); // Troque 'novo-arquivo.mp3' pelo caminho do novo arquivo MP3
-    changeScreen(7); // Altere para o número da tela seguinte
-  }
-
-  var secondAudio = null;
-
-  function playSecondMP3() {
-    // Inicia a reprodução do segundo arquivo MP3
-    secondAudio = new Audio('PRBS.mp3');
-    secondAudio.play();
-  }
-
-  function resetProcess() {
-    // Pare a reprodução do último MP3 (se estiver reproduzindo)
-    if (secondAudio !== null) {
-      secondAudio.pause();
-    }
-
-    // Altere o estilo do botão "Clique aqui" para que ele seja exibido novamente
-    var button = document.getElementById('cliqueAquiButton');
-    button.style.display = 'block';
-
-    // Altere a tela ativa de volta para a primeira tela (tela1)
-    changeScreen(1);
-  };
-  
-  function hideButton() {
-    var button = document.getElementById('cliqueAquiButton');
-    button.style.display = 'none';
-  }
-
+}
 </script>
 
-
-</body>
-</html>
