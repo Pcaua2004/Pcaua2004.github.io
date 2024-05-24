@@ -129,12 +129,18 @@
         </div>
     </div>
     <script>
+        // Localização do arquivo de som para o botão de toggle (substitua pelo caminho correto)
+        const toggleSound = new Audio('QSE.mp3'); // <-- Substitua pelo caminho do arquivo de som para toggle
+        // Localização do arquivo de som para o botão de calcular (substitua pelo caminho correto)
+        const calculateSound = new Audio('your_sound_calculate.mp3'); // <-- Substitua pelo caminho do arquivo de som para calcular
+
         function toggleBit(id) {
             const element = document.getElementById(id);
             const currentValue = parseInt(element.textContent);
             const newValue = currentValue === 0 ? 1 : 0;
             element.textContent = newValue;
             element.classList.toggle('active', newValue === 1);
+            toggleSound.play();
         }
 
         function calculate() {
@@ -172,6 +178,8 @@
             updateOutputClasses('s2', sum2);
             updateOutputClasses('s3', sum3);
             updateOutputClasses('cout', carry3);
+
+            calculateSound.play();
         }
 
         function updateOutputClasses(id, value) {
