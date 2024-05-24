@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,11 +63,16 @@
         .calculate-button:hover {
             background-color: #45a049;
         }
+        .plus-symbol {
+            font-size: 30px;
+            align-self: center;
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Simulação Somador 4 Bits</h1>
+        <h1>Simulador de Somador de 4 Bits</h1>
         <div class="inputs">
             <div class="bit">
                 <label>A3</label>
@@ -85,26 +90,25 @@
                 <label>A0</label>
                 <div class="circle-input" id="a0" onclick="toggleBit('a0')">0</div>
             </div>
-        </div>
-        <div class="inputs">
+            <div class="plus-symbol">+</div>
             <div class="bit">
                 <label>B3</label>
                 <div class="circle-input" id="b3" onclick="toggleBit('b3')">0</div>
             </div>
             <div class="bit">
                 <label>B2</label>
-                <div class="circle-input" id="b2" onclick="toggleBit('b2')">0</div>
+                <div class="circle-input" id="b2' onclick="toggleBit('b2')">0</div>
             </div>
             <div class="bit">
                 <label>B1</label>
-                <div class="circle-input" id="b1" onclick="toggleBit('b1')">0</div>
+                <div class="circle-input" id="b1' onclick="toggleBit('b1')">0</div>
             </div>
             <div class="bit">
                 <label>B0</label>
-                <div class="circle-input" id="b0" onclick="toggleBit('b0')">0</div>
+                <div class="circle-input" id="b0' onclick="toggleBit('b0')">0</div>
             </div>
         </div>
-        <button class="calculate-button" onclick="calculate()">Calcular</button>
+        <button class="calculate-button" onclick="calcular()">Calcular</button>
         <div class="outputs">
             <div class="bit">
                 <label>Cout</label>
@@ -146,7 +150,7 @@
             toggleSound.play();
         }
 
-        function calculate() {
+        function calcular() {
             const a3 = parseInt(document.getElementById('a3').textContent);
             const a2 = parseInt(document.getElementById('a2').textContent);
             const a1 = parseInt(document.getElementById('a1').textContent);
@@ -156,7 +160,7 @@
             const b1 = parseInt(document.getElementById('b1').textContent);
             const b0 = parseInt(document.getElementById('b0').textContent);
 
-            const cin = 0; // Carry-in is fixed to 0
+            const cin = 0; // Carry-in é fixado em 0
 
             const sum0 = a0 ^ b0 ^ cin;
             const carry0 = (a0 & b0) | (a0 & cin) | (b0 & cin);
