@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Somador de 4 Bits</title>
+    <title>Somador</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,17 +51,18 @@
             color: white;
         }
         .calculate-button {
-            width: 40px;
+            width: 100px;
             height: 40px;
-            border-radius: 50%;
+            border-radius: 5px;
             background-color: #4caf50;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
             border: none;
+            margin-top: 20px;
         }
         .calculate-button:hover {
             background-color: #45a049;
@@ -69,49 +70,58 @@
         .plus-symbol {
             font-size: 30px;
             align-self: center;
-            margin: 0 10px;
+            margin: 10px 0;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Simulador de Somador de 4 Bits</h1>
-        <div class="inputs">
-            <div class="bit">
-                <label>A3</label>
-                <div class="circle-input" id="a3" onclick="toggleBit('a3')">0</div>
-            </div>
-            <div class="bit">
-                <label>A2</label>
-                <div class="circle-input" id="a2" onclick="toggleBit('a2')">0</div>
-            </div>
-            <div class="bit">
-                <label>A1</label>
-                <div class="circle-input" id="a1" onclick="toggleBit('a1')">0</div>
-            </div>
-            <div class="bit">
-                <label>A0</label>
-                <div class="circle-input" id="a0" onclick="toggleBit('a0')">0</div>
+        <h1>Simulação do Somador de 4 Bits</h1>
+        <div class="input-group">
+            <div class="inputs">
+                <div class="bit">
+                    <label>A3</label>
+                    <div class="circle-input" id="a3" onclick="toggleBit('a3')">0</div>
+                </div>
+                <div class="bit">
+                    <label>A2</label>
+                    <div class="circle-input" id="a2" onclick="toggleBit('a2')">0</div>
+                </div>
+                <div class="bit">
+                    <label>A1</label>
+                    <div class="circle-input" id="a1" onclick="toggleBit('a1')">0</div>
+                </div>
+                <div class="bit">
+                    <label>A0</label>
+                    <div class="circle-input" id="a0" onclick="toggleBit('a0')">0</div>
+                </div>
             </div>
             <div class="plus-symbol">+</div>
-            <div class="bit">
-                <label>B3</label>
-                <div class="circle-input" id="b3" onclick="toggleBit('b3')">0</div>
-            </div>
-            <div class="bit">
-                <label>B2</label>
-                <div class="circle-input" id="b2" onclick="toggleBit('b2')">0</div>
-            </div>
-            <div class="bit">
-                <label>B1</label>
-                <div class="circle-input" id="b1" onclick="toggleBit('b1')">0</div>
-            </div>
-            <div class="bit">
-                <label>B0</label>
-                <div class="circle-input" id="b0" onclick="toggleBit('b0')">0</div>
+            <div class="inputs">
+                <div class="bit">
+                    <label>B3</label>
+                    <div class="circle-input" id="b3" onclick="toggleBit('b3')">0</div>
+                </div>
+                <div class="bit">
+                    <label>B2</label>
+                    <div class="circle-input" id="b2" onclick="toggleBit('b2')">0</div>
+                </div>
+                <div class="bit">
+                    <label>B1</label>
+                    <div class="circle-input" id="b1" onclick="toggleBit('b1')">0</div>
+                </div>
+                <div class="bit">
+                    <label>B0</label>
+                    <div class="circle-input" id="b0" onclick="toggleBit('b0')">0</div>
+                </div>
             </div>
         </div>
-        <div class="calculate-button" onclick="calcular()">=</div>
+        <div class="calculate-button" onclick="calcular()">Calcular</div>
         <div class="outputs">
             <div class="bit">
                 <label>Cout</label>
@@ -139,7 +149,7 @@
         // Localização do arquivo de som para o botão de toggle (substitua pelo caminho correto)
         const toggleSoundPath = 'newQSE.mp3'; // <-- Substitua pelo caminho do arquivo de som para toggle
         // Localização do arquivo de som para o botão de calcular (substitua pelo caminho correto)
-        const calculateSound = new Audio('newSGT.mp3'); // <-- Substitua pelo caminho do arquivo de som para calcular
+        const calculateSoundPath = 'newSGT.mp3'; // <-- Substitua pelo caminho do arquivo de som para calcular
 
         function toggleBit(id) {
             const element = document.getElementById(id);
@@ -189,6 +199,7 @@
             updateOutputClasses('s3', sum3);
             updateOutputClasses('cout', carry3);
 
+            const calculateSound = new Audio(calculateSoundPath);
             calculateSound.play();
         }
 
