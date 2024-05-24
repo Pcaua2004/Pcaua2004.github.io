@@ -130,7 +130,7 @@
     </div>
     <script>
         // Localização do arquivo de som para o botão de toggle (substitua pelo caminho correto)
-        const toggleSound = new Audio('newQSE.mp3'); // <-- Substitua pelo caminho do arquivo de som para toggle
+        const toggleSoundPath = 'newQSE.mp3'; // <-- Substitua pelo caminho do arquivo de som para toggle
         // Localização do arquivo de som para o botão de calcular (substitua pelo caminho correto)
         const calculateSound = new Audio('newSGT.mp3'); // <-- Substitua pelo caminho do arquivo de som para calcular
 
@@ -140,6 +140,9 @@
             const newValue = currentValue === 0 ? 1 : 0;
             element.textContent = newValue;
             element.classList.toggle('active', newValue === 1);
+
+            // Criar um novo objeto de áudio para cada clique
+            const toggleSound = new Audio(toggleSoundPath);
             toggleSound.play();
         }
 
