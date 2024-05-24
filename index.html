@@ -1,63 +1,183 @@
-<script>
-while(true){
-let input = prompt(
-`----------------------------------------------------------------
-  Bem-Vindo, escreva o NÚMERO correspondente a fruta:
-----------------------------------------------------------------
-1: Banana
-2: Maçã
-3: Manga
-4: Pera
-5: Uva
-6: Romã
-7: Maracujá
-8: Mamão
-9: Sair`
-);
-
-let tabelaFrutas = {
-    1: "Banana",
-    2: "Maçã",
-    3: "Manga",
-    4: "Pera",
-    5: "Uva",
-    6: "Romã",
-    7: "Maracujá",
-    8: "Mamão",
-    9: "Sair"
-};
-
-let escolhaDaFruta = tabelaFrutas[input];
-
-
-if(escolhaDaFruta){
-    if(escolhaDaFruta === "Sair"){
-        break
-    }else{
-    alert(`A fruta escolhida foi ${escolhaDaFruta}`);
-    if (escolhaDaFruta === "Banana") {
-            alert(` As bananas são naturalmente radioativas devido ao alto teor de potássio, mas não se preocupe, a quantidade é tão baixa que não representa riscos à saúde humana.`);
-        } else if (escolhaDaFruta === "Maçã") {
-            alert(` As maçãs flutuam na água porque cerca de 25% do seu volume é composto por ar.`);
-        } else if (escolhaDaFruta === "Manga") {
-            alert(` Existem mais de 1.000 variedades de manga cultivadas em todo o mundo.`);
-        } else if (escolhaDaFruta === "Pera") {
-            alert(` Pode levar de 5 a 7 anos para uma árvore de pereira começar a produzir frutas.Peras são ricas em fibras!`);
-        } else if (escolhaDaFruta === "Uva") {
-            alert(` As uvas são usadas na produção de mais de 60 tipos diferentes de bebidas, incluindo vinho, suco, geleia e passas.`);
-        } else if (escolhaDaFruta === "Romã") {
-            alert(` Uma romã pode conter mais de 600 sementes comestíveis.`);
-        } else if (escolhaDaFruta === "Maracujá") {
-            alert(` O maracujá contém uma substância chamada passiflorina, que pode ter efeitos relaxantes e calmantes.`);
-        } else if (escolhaDaFruta === "Mamão") {
-            alert(` O mamão é uma excelente fonte de vitamina C; uma única fruta pode fornecer mais de 200% da quantidade diária recomendada dessa vitamina.`);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Somador de 4 Bits</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
         }
-    }
-}else{
-    alert(`O número solicitado é inválido.\nAtualize a página para recomeçar.`);
-    break
-}
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 40px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 20px;
+        }
+        .inputs, .outputs {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .bit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .circle-input {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .circle-input.active {
+            background-color: #4caf50;
+            color: white;
+        }
+        .calculate-button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .calculate-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulação Somador 4 Bits</h1>
+        <div class="inputs">
+            <div class="bit">
+                <label>A3</label>
+                <div class="circle-input" id="a3" onclick="toggleBit('a3')">0</div>
+            </div>
+            <div class="bit">
+                <label>A2</label>
+                <div class="circle-input" id="a2" onclick="toggleBit('a2')">0</div>
+            </div>
+            <div class="bit">
+                <label>A1</label>
+                <div class="circle-input" id="a1" onclick="toggleBit('a1')">0</div>
+            </div>
+            <div class="bit">
+                <label>A0</label>
+                <div class="circle-input" id="a0" onclick="toggleBit('a0')">0</div>
+            </div>
+        </div>
+        <div class="inputs">
+            <div class="bit">
+                <label>B3</label>
+                <div class="circle-input" id="b3" onclick="toggleBit('b3')">0</div>
+            </div>
+            <div class="bit">
+                <label>B2</label>
+                <div class="circle-input" id="b2" onclick="toggleBit('b2')">0</div>
+            </div>
+            <div class="bit">
+                <label>B1</label>
+                <div class="circle-input" id="b1" onclick="toggleBit('b1')">0</div>
+            </div>
+            <div class="bit">
+                <label>B0</label>
+                <div class="circle-input" id="b0" onclick="toggleBit('b0')">0</div>
+            </div>
+        </div>
+        <button class="calculate-button" onclick="calculate()">Calcular</button>
+        <div class="outputs">
+            <div class="bit">
+                <label>Cout</label>
+                <div class="circle-input" id="cout">0</div>
+            </div>
+            <div class="bit">
+                <label>S3</label>
+                <div class="circle-input" id="s3">0</div>
+            </div>
+            <div class="bit">
+                <label>S2</label>
+                <div class="circle-input" id="s2">0</div>
+            </div>
+            <div class="bit">
+                <label>S1</label>
+                <div class="circle-input" id="s1">0</div>
+            </div>
+            <div class="bit">
+                <label>S0</label>
+                <div class="circle-input" id="s0">0</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleBit(id) {
+            const element = document.getElementById(id);
+            const currentValue = parseInt(element.textContent);
+            const newValue = currentValue === 0 ? 1 : 0;
+            element.textContent = newValue;
+            element.classList.toggle('active', newValue === 1);
+        }
 
-}
-</script>
+        function calculate() {
+            const a3 = parseInt(document.getElementById('a3').textContent);
+            const a2 = parseInt(document.getElementById('a2').textContent);
+            const a1 = parseInt(document.getElementById('a1').textContent);
+            const a0 = parseInt(document.getElementById('a0').textContent);
+            const b3 = parseInt(document.getElementById('b3').textContent);
+            const b2 = parseInt(document.getElementById('b2').textContent);
+            const b1 = parseInt(document.getElementById('b1').textContent);
+            const b0 = parseInt(document.getElementById('b0').textContent);
 
+            const cin = 0; // Carry-in is fixed to 0
+
+            const sum0 = a0 ^ b0 ^ cin;
+            const carry0 = (a0 & b0) | (a0 & cin) | (b0 & cin);
+
+            const sum1 = a1 ^ b1 ^ carry0;
+            const carry1 = (a1 & b1) | (a1 & carry0) | (b1 & carry0);
+
+            const sum2 = a2 ^ b2 ^ carry1;
+            const carry2 = (a2 & b2) | (a2 & carry1) | (b2 & carry1);
+
+            const sum3 = a3 ^ b3 ^ carry2;
+            const carry3 = (a3 & b3) | (a3 & carry2) | (b3 & carry2);
+
+            document.getElementById('s0').textContent = sum0;
+            document.getElementById('s1').textContent = sum1;
+            document.getElementById('s2').textContent = sum2;
+            document.getElementById('s3').textContent = sum3;
+            document.getElementById('cout').textContent = carry3;
+
+            updateOutputClasses('s0', sum0);
+            updateOutputClasses('s1', sum1);
+            updateOutputClasses('s2', sum2);
+            updateOutputClasses('s3', sum3);
+            updateOutputClasses('cout', carry3);
+        }
+
+        function updateOutputClasses(id, value) {
+            const element = document.getElementById(id);
+            element.classList.toggle('active', value === 1);
+        }
+    </script>
+</body>
+</html>
