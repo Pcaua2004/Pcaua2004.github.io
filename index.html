@@ -3,210 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Somador</title>
+    <title>Agência de Manicure</title>
     <style>
-        body {
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             font-family: Arial, sans-serif;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #00aaff, #00ff88);
+        }
+        .screen {
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
         }
-        .container {
+        .visible {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: white;
-            padding: 40px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin: 20px;
         }
-        .inputs, .outputs {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .bit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .circle-input {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-        }
-        .circle-input.active {
-            background-color: #4caf50;
-            color: white;
-        }
-        .calculate-button {
-            width: 100px;
-            height: 40px;
+        .button {
+            margin: 10px;
+            border: none;
             border-radius: 5px;
-            background-color: #4caf50;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
             font-size: 16px;
-            border: none;
+            font-weight: bold;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .button-sim {
+            padding: 20px 40px;
+            background-color: #28a745;
+        }
+        .button-sim:hover {
+            background-color: #218838;
+        }
+        .button-no {
+            padding: 10px 20px;
+            background-color: #dc3545;
+        }
+        .button-no:hover {
+            background-color: #c82333;
+        }
+        @keyframes blink {
+            0%, 25%, 50%, 75% {
+                opacity: 1;
+            }
+            25%, 50%, 75%, 100% {
+                opacity: 0;
+            }
+        }
+        @keyframes growAndDisappear {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(10);
+                opacity: 0;
+            }
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeToBlack {
+            0% {
+                background-color: transparent;
+                color: white;
+            }
+            100% {
+                background-color: black;
+                color: red;
+            }
+        }
+        img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 10px;
+        }
+        #message {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
             margin-top: 20px;
+            white-space: pre-wrap;
+            text-shadow: 
+                1px 1px 0 #000000,
+                -1px -1px 0 #000000, 
+                1px -1px 0 #000000, 
+                -1px 1px 0 #000000;
         }
-        .calculate-button:hover {
-            background-color: #45a049;
+        .letter {
+            display: inline-block;
+            animation: slideIn 0.5s ease;
+            color: red;
+            text-shadow: 
+                1px 1px 0 #000000,
+                -1px -1px 0 #000000, 
+                1px -1px 0 #000000, 
+                -1px 1px 0 #000000;
         }
-        .plus-symbol {
-            font-size: 30px;
-            align-self: center;
-            margin: 10px 0;
+        .button-schedule {
+            padding: 20px 40px;
+            background-color: #007bff;
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
         }
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .button-schedule:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Simulação do Somador de 4 Bits</h1>
-        <div class="input-group">
-            <div class="inputs">
-                <div class="bit">
-                    <label>A3</label>
-                    <div class="circle-input" id="a3" onclick="toggleBit('a3')">0</div>
-                </div>
-                <div class="bit">
-                    <label>A2</label>
-                    <div class="circle-input" id="a2" onclick="toggleBit('a2')">0</div>
-                </div>
-                <div class="bit">
-                    <label>A1</label>
-                    <div class="circle-input" id="a1" onclick="toggleBit('a1')">0</div>
-                </div>
-                <div class="bit">
-                    <label>A0</label>
-                    <div class="circle-input" id="a0" onclick="toggleBit('a0')">0</div>
-                </div>
-            </div>
-            <div class="plus-symbol">+</div>
-            <div class="inputs">
-                <div class="bit">
-                    <label>B3</label>
-                    <div class="circle-input" id="b3" onclick="toggleBit('b3')">0</div>
-                </div>
-                <div class="bit">
-                    <label>B2</label>
-                    <div class="circle-input" id="b2" onclick="toggleBit('b2')">0</div>
-                </div>
-                <div class="bit">
-                    <label>B1</label>
-                    <div class="circle-input" id="b1" onclick="toggleBit('b1')">0</div>
-                </div>
-                <div class="bit">
-                    <label>B0</label>
-                    <div class="circle-input" id="b0" onclick="toggleBit('b0')">0</div>
-                </div>
-            </div>
-        </div>
-        <div class="calculate-button" onclick="calcular()">Calcular</div>
-        <div class="outputs">
-            <div class="bit">
-                <label>Cout</label>
-                <div class="circle-input" id="cout">0</div>
-            </div>
-            <div class="bit">
-                <label>S3</label>
-                <div class="circle-input" id="s3">0</div>
-            </div>
-            <div class="bit">
-                <label>S2</label>
-                <div class="circle-input" id="s2">0</div>
-            </div>
-            <div class="bit">
-                <label>S1</label>
-                <div class="circle-input" id="s1">0</div>
-            </div>
-            <div class="bit">
-                <label>S0</label>
-                <div class="circle-input" id="s0">0</div>
-            </div>
-        </div>
+    <div id="introScreen" class="screen visible">
+        <img src="https://blog-static.infra.grancursosonline.com.br/wp-content/uploads/2016/03/03190401/delator.jpg" alt="Você">
+        <p style="color: #ffffff; font-weight: bold; text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000; font-size: 30px;">VOCÊ</p>
+    </div>
+    <div id="screen1" class="screen">
+        <img src="https://3.bp.blogspot.com/-CHs-0lM7Gq0/UvCXI1wHC2I/AAAAAAAAdm4/3YH0cfM7YMw/s1600/1620818_517115045070655_1579885984_n.jpg" alt="Unhas">
+        <p style="color: #ffffff; font-weight: bold; text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;">VOCÊ ESTÁ CANSADA DE UNHAS FEIAS COMO ESSA?</p>
+        <button class="button button-sim" onclick="showScreen('screen2')">SIM</button>
+        <button id="noButton1" class="button button-no" onclick="moveButton(this)">NÃO</button>
+    </div>
+    <div id="screen2" class="screen">
+        <img src="https://controlsigma.com.br/wp-content/uploads/2015/08/11.jpg" alt="Valores Caros">
+        <p style="color: #ffffff; font-weight: bold; text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;">ESTÁ CANSADA DE VALORES CAROS?</p>
+        <button class="button button-sim" onclick="showScreen('screen4')">SIM</button>
+        <button id="noButton2" class="button button-no" onclick="runAwayOnClick(this)">NÃO</button>
+    </div>
+    <div id="screen4" class="screen">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi96eJgtQpYKNwk4w7ZX88tZdSgFdSO3NMJ9mHoJni9GHfjIszBZpc_kd_FRv7nC9nI5IdBju798ykFj2e2IL-nb8zCiAoqPIMaN_qV2bwgYIMOLUjgz9lmArrJG-9X6Q9cbQhIpVDfCuM/s1600/Cut%25C3%25ADcula-Inflamada-o-que-fazer-04.jpg" alt="Cutículas Mal Feitas">
+        <p style="color: #ffffff; font-weight: bold; text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;">ESTÁ CANSADA DE CÚTICULAS MAL FEITAS?</p>
+        <button class="button button-sim" onclick="showScreen('screen3')">SIM</button>
+        <button id="noButton4" class="button button-no" onclick="revealMessage()">NÃO</button>
+        <div id="message"></div>
+    </div>
+    <div id="screen3" class="screen">
+        <img src="https://i.ibb.co/PCJTypV/Untitled.png" alt="Má Qualidade de Atendimento">
+        <p style="color: #ffffff; font-weight: bold; text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;">ESTÁ CANSADA DE MÁ QUALIDADE DE ATENDIMENTO?</p>
+        <button class="button button-sim" onclick="showScreen('screen6')">SIM</button>
+        <button id="noButton3" class="button button-no" onclick="blinkAndGrow(this)">NÃO</button>
+    </div>
+    <div id="screen6" class="screen">
+        <img src="https://i.ibb.co/G2mJL85/Whats-App-Image-2024-08-16-at-10-15-17.jpg" alt="Idiotas">
+        <p style="color: #ffffff; font-weight: bold; text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;">E principalmente cansada de idiotas?</p>
+        <button class="button button-sim" onclick="showScreen('screen5')">SIM!!!</button>
+    </div>
+    <div id="screen5" class="screen">
+        <h2 style="color: #ffffff; font-weight: bold; text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;">Parabéns!</h2>
+        <p style="color: #ffffff; font-weight: bold; text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000;">Você está pronta para agendar seu horário aqui na Cauã'sBeauty!.</p>
+        <a href="https://wa.me/5585998175354?text=Ol%C3%A1%20Cau%C3%A3%20seu%20lindo%2C%20sarado%20e%20gostoso%2C%20agenda%20uma%20consulta%20pra%20eu%20fazer%20minhas%20unhas%20por%20favor%21" class="button button-schedule">AGENDAR AGORA!</a>
     </div>
     <script>
-        // Localização do arquivo de som para o botão de toggle (substitua pelo caminho correto)
-        const toggleSoundPath = 'newQSE.mp3'; // <-- Substitua pelo caminho do arquivo de som para toggle
-        // Localização do arquivo de som para o botão de calcular (substitua pelo caminho correto)
-        const calculateSoundPath = 'newSGT.mp3'; // <-- Substitua pelo caminho do arquivo de som para calcular
+        let messageIndex = 0;
+        let messageComplete = false;
 
-        function toggleBit(id) {
-            const element = document.getElementById(id);
-            const currentValue = parseInt(element.textContent);
-            const newValue = currentValue === 0 ? 1 : 0;
-            element.textContent = newValue;
-            element.classList.toggle('active', newValue === 1);
-
-            // Criar um novo objeto de áudio para cada clique
-            const toggleSound = new Audio(toggleSoundPath);
-            toggleSound.play();
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('visible');
+            });
+            document.getElementById(screenId).classList.add('visible');
         }
 
-        function calcular() {
-            const a3 = parseInt(document.getElementById('a3').textContent);
-            const a2 = parseInt(document.getElementById('a2').textContent);
-            const a1 = parseInt(document.getElementById('a1').textContent);
-            const a0 = parseInt(document.getElementById('a0').textContent);
-            const b3 = parseInt(document.getElementById('b3').textContent);
-            const b2 = parseInt(document.getElementById('b2').textContent);
-            const b1 = parseInt(document.getElementById('b1').textContent);
-            const b0 = parseInt(document.getElementById('b0').textContent);
-
-            const cin = 0; // Carry-in é fixado em 0
-
-            const sum0 = a0 ^ b0 ^ cin;
-            const carry0 = (a0 & b0) | (a0 & cin) | (b0 & cin);
-
-            const sum1 = a1 ^ b1 ^ carry0;
-            const carry1 = (a1 & b1) | (a1 & carry0) | (b1 & carry0);
-
-            const sum2 = a2 ^ b2 ^ carry1;
-            const carry2 = (a2 & b2) | (a2 & carry1) | (b2 & carry1);
-
-            const sum3 = a3 ^ b3 ^ carry2;
-            const carry3 = (a3 & b3) | (a3 & carry2) | (b3 & carry2);
-
-            document.getElementById('s0').textContent = sum0;
-            document.getElementById('s1').textContent = sum1;
-            document.getElementById('s2').textContent = sum2;
-            document.getElementById('s3').textContent = sum3;
-            document.getElementById('cout').textContent = carry3;
-
-            updateOutputClasses('s0', sum0);
-            updateOutputClasses('s1', sum1);
-            updateOutputClasses('s2', sum2);
-            updateOutputClasses('s3', sum3);
-            updateOutputClasses('cout', carry3);
-
-            const calculateSound = new Audio(calculateSoundPath);
-            calculateSound.play();
+        function moveButton(button) {
+            button.style.position = 'absolute';
+            button.style.top = Math.random() * 80 + '%';
+            button.style.left = Math.random() * 80 + '%';
         }
 
-        function updateOutputClasses(id, value) {
-            const element = document.getElementById(id);
-            element.classList.toggle('active', value === 1);
+        function runAwayOnClick(button) {
+            button.removeEventListener('click', runAwayOnClick);
+            setInterval(() => {
+                button.style.position = 'absolute';
+                button.style.top = Math.random() * 80 + '%';
+                button.style.left = Math.random() * 80 + '%';
+            }, 100);
         }
+
+        function revealMessage() {
+            const messageDiv = document.getElementById('message');
+            const fullMessage = "PARA DE APERTAR NÃO PORRA!";
+            const charsToShow = 2;
+
+            if (messageIndex < fullMessage.length) {
+                for (let i = 0; i < charsToShow; i++) {
+                    if (messageIndex < fullMessage.length) {
+                        const letter = document.createElement('span');
+                        letter.className = 'letter';
+                        letter.textContent = fullMessage[messageIndex];
+                        messageDiv.appendChild(letter);
+                        messageIndex++;
+                    }
+                }
+            }
+
+            if (messageIndex >= fullMessage.length) {
+                messageComplete = true;
+            }
+        }
+
+
+        function blinkAndGrow(button) {
+            button.style.animation = 'blink 0.1s step-end infinite';
+            setTimeout(function() {
+                button.style.animation = 'growAndDisappear 2s forwards';
+            }, 2000);
+            setTimeout(function() {
+                button.style.display = 'none';
+            }, 4000);
+        }
+
+        setTimeout(function() {
+            showScreen('screen1');
+        }, 3000);
     </script>
 </body>
 </html>
